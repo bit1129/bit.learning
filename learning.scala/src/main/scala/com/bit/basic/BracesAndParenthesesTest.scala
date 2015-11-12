@@ -55,8 +55,4 @@ class BracesAndParenthesesTest {
 
   }
 
-  def twoParameter(f: String=>String, g: String=>String): String = {
-  }
-
-
 }
