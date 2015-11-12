@@ -25,30 +25,60 @@ class InFixTest {
    */
   @Test
   def testInfix3(): Unit = {
-    val b = 4 :: 3 :: List(1,2)
+    val b = 4 :: 3 :: List(1, 2)
     println(b)
   }
 
   @Test
   def testInfix4(): Unit = {
     object Cache {
-      val cache  = new ArrayBuffer[String]()
-      def >>: (data: String): this.type = {
+      val cache = new ArrayBuffer[String]()
+
+      def >>:(data: String): this.type = {
         cache += data
         this
       }
+
       def print1(): Unit = {
-        cache.foreach(x=>print(x + " "))
+        cache.foreach(x => print(x + " "))
       }
     }
 
-    val cache =  "DEF" >>:  "ABC">>: Cache
+    val cache = "DEF" >>: "ABC" >>: Cache
 
     //ABC DEF
     cache.print1()
   }
 
 
+  @Test
+  def testInfix5(): Unit = {
+
+    /**
+     * 声明变量类型时，也可以用 A Foo B 中缀形式来表达，Foo也称为中缀类型
+     * Foo怎么用？ 具有两个参数的Case Class是中缀类型
+     * @tparam A
+     * @tparam B
+     */
+    class InfixClass[A, B]
+    var a: Int InfixClass String = null;
+
+  }
+
+  @Test
+  def testInfix6(): Unit = {
+
+    /**
+     * 声明变量类型时，也可以用 A Foo B 中缀形式来表达，Foo也称为中缀类型
+     * Foo怎么用？
+     */
+    case class InfixCaseClass(val a: Int, val b: Int)
+    val x = InfixCaseClass(3, 4)
+    x match {
+      case 3 InfixCaseClass  4 => println("matched")
+      case _ => println("Unmatched")
+    }
+  }
   def inc(x: Int) = x + 1
 
 
