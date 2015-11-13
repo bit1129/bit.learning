@@ -26,6 +26,5 @@ class TypeErasureTest {
       case _ => println("unmatched")
     }*/
 
-
   }
 }
