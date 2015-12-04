@@ -8,6 +8,7 @@
   <modules>
     <module>learning.scala</module>
     <module>learning.spark</module>
+    <module>learning.hive.0.14.0</module>
   </modules>
   <properties>
     <scala.version>2.10.4</scala.version>
