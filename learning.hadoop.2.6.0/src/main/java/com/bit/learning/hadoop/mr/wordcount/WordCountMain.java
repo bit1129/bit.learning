@@ -5,6 +5,8 @@ import com.bit.learning.hadoop.utils.IOUtils;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.conf.Configured;
 import org.apache.hadoop.fs.Path;
+import org.apache.hadoop.io.IntWritable;
+import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Job;
 import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
 import org.apache.hadoop.mapreduce.lib.input.TextInputFormat;
@@ -55,6 +57,12 @@ class Runner extends Configured implements Tool {
         job.setJobName("WordCountMain");
         FileInputFormat.addInputPath(job, new Path("file:///mr/input"));
         FileOutputFormat.setOutputPath(job, new Path("file:///mr/output" + System.currentTimeMillis()));
+
+        //如果不设置MapOutputKeyClass和MapOutputValueClass，那么任务会执行失败，
+        //也就是说，这两个设置是关键设置
+        job.setMapOutputKeyClass(Text.class);
+        job.setMapOutputValueClass(IntWritable.class);
+
         job.setNumReduceTasks(2);
         boolean success =  job.waitForCompletion(true);
         System.out.println("job success: "  + success);
