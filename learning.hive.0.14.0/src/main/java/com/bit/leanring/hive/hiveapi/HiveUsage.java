@@ -85,7 +85,8 @@ public class HiveUsage {
             } else {
                 Partition p = partitions.get(0);
                 System.out.println("Partition " + p.getName() + "'s data location is " + p.getDataLocation());
-
+                System.out.println("Partition " + p.getName() + "'s input format is " + p.getInputFormatClass().getName());
+                System.out.println("Partition " + p.getName() + "'s output format is " + p.getOutputFormatClass().getName());
 
                 String delim = p.getParameters().get("field.delim");
                 System.out.println("delim returned from partition is: " + delim);
