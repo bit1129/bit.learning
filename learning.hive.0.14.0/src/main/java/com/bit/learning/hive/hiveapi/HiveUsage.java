@@ -1,4 +1,4 @@
-package com.bit.leanring.hive.hiveapi;
+package com.bit.learning.hive.hiveapi;
 
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.hive.conf.HiveConf;

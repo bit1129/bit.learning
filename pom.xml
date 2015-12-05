@@ -10,6 +10,7 @@
     <module>learning.spark</module>
     <module>learning.hive.0.14.0</module>
     <module>learning.hadoop.2.6.0</module>
+    <module>learning.java</module>
   </modules>
   <properties>
     <scala.version>2.10.4</scala.version>

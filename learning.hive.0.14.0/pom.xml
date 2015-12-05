@@ -59,7 +59,7 @@
                     </descriptorRefs>
                     <archive>
                         <manifest>
-                            <mainClass>com.bit.leanring.hive.hiveapi.HiveUsage</mainClass>
+                            <mainClass>com.bit.learning.hive.hiveapi.HiveUsage</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
