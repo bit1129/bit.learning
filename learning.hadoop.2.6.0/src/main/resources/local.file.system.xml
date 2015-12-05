@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <property>
+        <name>fs.file.impl</name>
+        <value>com.bit.learning.hadoop.fs.windows.WindowsLocalFileSystem</value>
+    </property>
+    <property>
+        <name>fs.AbstractFileSystem.file.impl</name>
+        <value>com.bit.learning.hadoop.fs.windows.WindowsChecksumFs</value>
+    </property>
+</configuration>
