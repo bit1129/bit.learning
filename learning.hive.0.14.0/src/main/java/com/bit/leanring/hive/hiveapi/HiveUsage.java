@@ -23,7 +23,7 @@ import java.util.List;
  */
 public class HiveUsage {
     public static void main(String[] args) throws HiveException {
-        System.out.println("Start to run HiveUsage");
+        System.out.println("=============================Start to run HiveUsage==========================");
         Configuration conf = new Configuration();
         HiveConf hc = new HiveConf(conf, HiveUsage.class);
         Hive hive = Hive.get(hc);
