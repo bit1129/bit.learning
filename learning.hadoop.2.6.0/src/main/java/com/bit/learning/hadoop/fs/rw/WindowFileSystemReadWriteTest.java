@@ -1,5 +1,6 @@
 package com.bit.learning.hadoop.fs.rw;
 
+import com.bit.learning.hadoop.utils.IOUtils;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.FileSystem;
 import org.apache.hadoop.fs.LocatedFileStatus;
@@ -16,11 +17,7 @@ import java.net.URI;
 public class WindowFileSystemReadWriteTest {
     public static void main(String[] args) throws Exception {
         Configuration conf = new Configuration();
-        ClassLoader loader = WindowFileSystemReadWriteTest.class.getClassLoader();
-        InputStream in = loader.getResourceAsStream("local.file.system.xml");
-        if (in == null) {
-            in = loader.getResourceAsStream("/local.file.system.xml");
-        }
+        InputStream in = IOUtils.readFromClasspath("local.file.system.xml");
         conf.addResource(in);
         FileSystem fs = FileSystem.get(conf);
 
