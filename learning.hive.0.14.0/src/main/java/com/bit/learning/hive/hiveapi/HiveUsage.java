@@ -80,6 +80,8 @@ public class HiveUsage {
             Map<String, String> partitionSpec = new HashMap<String, String>();
             partitionSpec.put(partName,partValue);
             List<Partition> partitions = hive.getPartitions(t, partitionSpec);
+
+            //Can the size of partitions be greater than 1?
             if (partitions == null || partitions.size() <= 0) {
                 throw new RuntimeException("Unable to get the partition, partitions is null? " + (partitions == null));
             } else {
