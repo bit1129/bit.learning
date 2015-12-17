@@ -7,6 +7,7 @@ import org.apache.hadoop.fs.LocatedFileStatus;
 import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.fs.RemoteIterator;
 
+import java.io.File;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.URI;
@@ -79,6 +80,12 @@ public class WindowFileSystemReadWriteTest {
         //当前的工程是在D盘，即working directory是d:/myprojects/learning,为什么/指向了d盘？
         while (fileStatuses.hasNext()) {
             LocatedFileStatus fileStatus = fileStatuses.next();
+            //the file size
+            long length = fileStatus.getLen();
+            Path p = fileStatus.getPath();
+            String pp = p.toUri().getPath();
+            File file = new File(pp);
+            System.out.println(file.exists());
             System.out.println(fileStatus.getPath().toString());
         }
     }
