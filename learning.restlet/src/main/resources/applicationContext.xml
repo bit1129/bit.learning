@@ -28,6 +28,7 @@
 
     <bean name="restletRouter" class="org.restlet.ext.spring.SpringBeanRouter"/>
 
-    <bean name="/task" class="com.bit.restlet.spring.TaskResource" scope="prototype" autowire="byName"/>
+    <!--How to figure out the taskId in the TaskResource-->
+    <bean name="/tasks/{taskId}/{subTaskId}" class="com.bit.restlet.spring.TaskResource" scope="prototype" autowire="byName"/>
 
 </beans>
