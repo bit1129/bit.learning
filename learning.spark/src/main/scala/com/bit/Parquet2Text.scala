@@ -15,7 +15,7 @@ object Parquet2Text {
     val sc = new SparkContext(conf)
     val sqlContext = new SQLContext(sc);
 
-    val table = "store_sales"; //customer, customer_address, store
+    val table = "store_sales"; //customer, customer_address, store, store_sales
 
     val parquet = sqlContext.read.parquet("hdfs://ns1/tmp/spark_perf/scaleFactor=30/useDecimal=true/" + table)
     parquet.printSchema();
