@@ -8,7 +8,7 @@ import org.apache.hadoop.hbase.util.Bytes;
 
 import java.io.IOException;
 
-public class HBaseTest {
+public class PutTest {
     public static void main(String[] args) throws IOException {
         Configuration conf = HBaseConfiguration.create();
 
