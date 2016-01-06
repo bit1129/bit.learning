@@ -2,9 +2,6 @@ package com.bit.learning.java.runtime;
 
 import java.io.*;
 
-/**
- * Created by yuzt on 16-1-6.
- */
 public class ProcessBuilderTest {
     public static void main(String[] args) throws IOException, InterruptedException {
 
@@ -20,7 +17,9 @@ public class ProcessBuilderTest {
         }
 
         builder.directory(workDir);
-        String[] commands = new String[]{"sh", shFile};
+        boolean failTheProcess = false;
+        String suffix = failTheProcess ? ".noexist" : "";
+        String[] commands = new String[]{"sh", shFile + suffix};
         builder.command(commands);
 
         final Process proc = builder.start();
@@ -79,6 +78,7 @@ public class ProcessBuilderTest {
             }
         };
         t2.start();
+
 
         //while loop before finished
         int code = proc.waitFor();
