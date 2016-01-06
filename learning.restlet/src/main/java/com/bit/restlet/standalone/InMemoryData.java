@@ -1,4 +1,4 @@
-package com.bit.restlet;
+package com.bit.restlet.standalone;
 
 import java.util.HashSet;
 import java.util.Set;

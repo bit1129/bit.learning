@@ -1,4 +1,4 @@
-package com.bit.restlet;
+package com.bit.restlet.standalone;
 
 import org.restlet.Application;
 import org.restlet.Restlet;

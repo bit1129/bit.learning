@@ -1,9 +1,6 @@
-package com.bit.restlet;
+package com.bit.restlet.standalone;
 
-/**
- * Created by yuzt on 16-1-6.
- */
-public class Book {
+public class Task {
     private int id;
     private String name;
 
@@ -28,9 +25,9 @@ public class Book {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        Book book = (Book) o;
+        Task task = (Task) o;
 
-        return id == book.id;
+        return id == task.id;
 
     }
 

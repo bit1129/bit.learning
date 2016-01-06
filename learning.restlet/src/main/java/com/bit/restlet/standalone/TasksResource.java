@@ -1,4 +1,4 @@
-package com.bit.restlet;
+package com.bit.restlet.standalone;
 
 import org.json.JSONObject;
 import org.restlet.ext.json.JsonRepresentation;

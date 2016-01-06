@@ -1,4 +1,4 @@
-package com.bit.restlet;
+package com.bit.restlet.standalone;
 
 /**
  * Created by yuzt on 16-1-6.

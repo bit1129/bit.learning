@@ -1,11 +1,11 @@
-package com.bit.restlet;
+package com.bit.restlet.standalone;
 
 import org.restlet.Component;
 import org.restlet.Context;
 import org.restlet.Server;
 import org.restlet.data.Protocol;
 
-public class RestletServer {
+public class StandaloneRestletServer {
     private static void startServer(int port) throws Exception {
         Component component = new Component();
         // Add a new HTTP server listening on port 8111.
