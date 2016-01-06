@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+    http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
+    http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd
+    http://www.springframework.org/schema/aop
+    http://www.springframework.org/schema/aop/spring-aop.xsd"
+       default-autowire="byName">
+    <context:component-scan base-package="com.bit.restlet.spring"/>
+    <aop:aspectj-autoproxy proxy-target-class="true"/>
+    <context:annotation-config/>
+
+    <!-- 定义restlet application-->
+
+    <bean id="restletApplication" class="org.restlet.Application">
+        <property name="root" ref="restletRouter"/>
+    </bean>
+
+    <bean id="restletComponent" class="org.restlet.ext.spring.SpringComponent">
+        <property name="defaultTarget" ref="restletApplication"/>
+    </bean>
+
+    <bean name="restletRouter" class="org.restlet.ext.spring.SpringBeanRouter"/>
+
+    <bean name="/task" class="com.bit.restlet.spring.TaskResource" scope="prototype" autowire="byName"/>
+
+</beans>
