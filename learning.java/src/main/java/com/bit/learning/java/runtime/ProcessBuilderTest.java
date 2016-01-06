@@ -17,9 +17,22 @@ public class ProcessBuilderTest {
         }
 
         builder.directory(workDir);
-        boolean failTheProcess = false;
-        String suffix = failTheProcess ? ".noexist" : "";
-        String[] commands = new String[]{"sh", shFile + suffix};
+        boolean useExistShellFile = true;
+        shFile = useExistShellFile ? shFile : shFile + ".noneExist";
+        String[] validCommands = new String[]{"sh", shFile, "argument1", "argument2"};
+
+        /**
+         * sh echo.sh args does NOT work for the java ProcessBuilder, must separate the script into command string
+         */
+        String[] invalidCommands = new String[]{String.format("sh %s argument1 argument2", shFile)};
+
+        boolean useValidCommands = true;
+        String[] commands;
+        if (useValidCommands) {
+            commands = validCommands;
+        } else {
+            commands = invalidCommands;
+        }
         builder.command(commands);
 
         final Process proc = builder.start();
