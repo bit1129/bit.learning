@@ -13,6 +13,7 @@
     <module>learning.java</module>
     <module>learning.hbase.1.1.2</module>
     <module>learning.restlet</module>
+    <module>learning.mybatis</module>
   </modules>
   <properties>
     <scala.version>2.10.4</scala.version>
