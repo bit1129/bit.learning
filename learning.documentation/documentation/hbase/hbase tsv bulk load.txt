@@ -1,0 +1,24 @@
+========直接加载数据到HBase中=================
+hbase org.apache.hadoop.hbase.mapreduce.ImportTsv -Dimporttsv.columns=HBASE_ROW_KEY,cf1:age tsv_table /testdata/tsv.txt
+
+执行这个语句的功能是将HDFS上的TSV文件/testdata/tsv.txt加载到HBase的tsv_table中，
+
+
+1. tsv.txt的文件内容
+ABC 21
+DEF 22
+2. tsv_table的建表语句是
+create 'tsv_table', 'cf1'
+3. -Dimporttsv.columns=HBASE_ROW_KEY语句的含义是指定第一列为ROWKEY列，第二列名称是cf1:age(column family为cf1，column name为age)
+
+
+======将数据输出为HFile文件存放到HDFS上，然后把HFile文件加载到HBase中=================
+
+0. create 'tsv_table2', 'cf1'
+
+1. hbase org.apache.hadoop.hbase.mapreduce.ImportTsv -Dimporttsv.columns=HBASE_ROW_KEY,cf1:age -Dimporttsv.bulk.output=/testdata/hbaseimporttsvbulkoutput tsv_table2 /testdata/tsv.txt
+执行这条语句，是将HDFS上的/testdata/tsv.txt转换为HFile文件格式存放到HDFS的/testdata/hbaseimporttsvbulkoutput目录下，/testdata/hbaseimporttsvbulkoutput目录结构是
+/testdata/hbaseimporttsvbulkoutput/cf1/fcdb1d457955433f8e27518908570c6e
+
+2.以增量的方式将HDFS上的HFile文件追加到tsv_table中
+hbase org.apache.hadoop.hbase.mapreduce.LoadIncrementalHFiles /testdata/hbaseimporttsvbulkoutput tsv_table2
