@@ -1,0 +1,27 @@
+HBase RowCounter MapReducer作业用于计算一个HBase Table中有多少行，运行脚本是
+
+
+HADOOP_CLASSPATH=$($HBASE_HOME/bin/hbase classpath) $HADOOP_HOME/bin/hadoop jar $HBASE_HOME/lib/hbase-server-1.1.2.jar rowcounter tsv_table
+
+
+
+说明：
+1. rowcounter是hbase-server-1.1.2.jar中MPReduce作业的名字
+2. tsv_table是要统计行数的表名
+3. $($HBASE_HOME/bin/hbase classpath)的作用是执行hbase classpath来获得Hbase的classpath信息，它是以:分割的所有的jar，这个脚本有点问题是HBASE中自带的HADOOP jar
+和在环境变量中通过HADOOP_HOME环境变量设置的HADOOP的jar都加进来了
+4. 通过hadoop jar命令执行MR时，可以在它之前指定HADOOP_CLASSPATH变量，中间通过空格分开，(这是一种什么语法形式？?)
+
+
+
+创建一个abc.sh，内容是echo $ABC
+
+如下方式执行，则ABC变量的值为空
+
+ABC=1
+sh abc.sh
+
+
+而如下方式则可以
+
+ABC=1 sh abc.sh
