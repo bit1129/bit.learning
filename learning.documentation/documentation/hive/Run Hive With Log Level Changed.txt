@@ -1,0 +1,3 @@
+hive --hiveconf hive.root.logger=INFO,console
+
+通过这个命令启动的hive，可以在控制台上查看详细的Hive运行信息
