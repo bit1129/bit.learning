@@ -1,0 +1,4 @@
+###Spark 1.3
+./make-distribution.sh --name hadoop2.6.0-withouthive --tgz -Phadoop-2.6 -Dhadoop.version=2.6.0 -Pyarn --skip-java-test
+
+--skip-java-test表示以上命令
