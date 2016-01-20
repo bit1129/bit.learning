@@ -1,0 +1,47 @@
+版本：
+Hive 1.2.1
+Spark: 1.4.1(不带Hive编译的版本)
+Hadoop： 2.6.0
+
+编译不带Hive的Spark
+a. 下载Spark 1.4.1的源代码
+b.解压使用如下命令进行编译
+./make-distribution.sh --name hadoop2.6.0-withouthive --tgz -Phadoop-2.6 -Dhadoop.version=2.6.0 -Pyarn
+
+编译完成后，进行Spark on YARN相关的配置，然后将SPARK_HOME加到系统环境变量中
+
+
+将$SPARK_HOME/lib下的assembly jar添加到$HIVE_HOME/lib目录下
+
+
+启动hive
+在终端中输入
+hive>set spark.master=yarn-client(可以接受yarn-cluster以及standalone mode的master url)
+hive>set hive.execution.engine=spark
+
+
+hive>use db_1;
+hive>select count(1) from t1;
+
+select count(1)  from t1触发Spark作业提交，而select * from t1则没有触发作业提交
+
+
+关闭Hive
+
+
+
+启动Hive Server
+$HIVE_HOME/bin/hiverserver2
+此种方式在前台进启动，在另外一个窗口启动beeline
+
+beeline>!connect jdbc:hive2://localhost:10000
+输入机器用户名，密码保留为空，在beeline终端输入
+set spark.master=yarn-client(可以接受yarn-cluster以及standalone mode的master url)
+set hive.execution.engine=spark
+
+也可以将执行引擎切换到Spark
+
+
+
+说明：
+实验过Spark 1.5.X以及spark1.3.1版本，均不能正常工作
