@@ -1,3 +1,16 @@
+第一种做法：
+
 hive --hiveconf hive.root.logger=INFO,console
 
 通过这个命令启动的hive，可以在控制台上查看详细的Hive运行信息
+
+
+第二种做法
+
+修改$HIVE_HOME/conf/ hive-log4j.properties文件，将
+hive.root.logger选项做如下修改：
+hive.root.logger=INFO,console
+
+第三种做法
+
+hive --hiveconf hive.log4j.file=自定义的hivelog配置文件(可以拷贝一份$HIVE_HOME/conf/ hive-log4j.properties文件，然后做相应的修改)
