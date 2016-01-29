@@ -1,0 +1,6 @@
+Hive表的数据可以以压缩的格式存储，同时仍然有通过数据分片进行并行处理的能力，
+
+
+为了兼顾压缩和并行处理，只能是使用SEQUENCE格式进行存储，而不能使用GZIP进行压缩，
+
+详见Hive的说明文档：https://cwiki.apache.org/confluence/display/Hive/CompressedStorage
