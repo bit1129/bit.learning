@@ -1,0 +1,11 @@
+
+cd $HIVE_HOME/bin
+./beeline -u "jdbc:hive2://localhost:10000/default" -n "yuzt" -p "" -f abc.sql
+
+通过上面的操作可以实现类似Hive JDBC的操作，其中-n指定用户名，-p指定密码，-f指定要执行的SQL语句
+
+等价于
+./hive -f abc.sql
+
+
+
