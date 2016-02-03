@@ -1,0 +1,14 @@
+对于spark on yarn client，
+
+1. ApplicationMaster进程是ExecutorLauncher，将--properties-file作为参数传递，
+对于Executor需要的配置信息，则是Executor向Driver主动获取
+
+对于spark on yarn cluster，
+
+1. ApplicationMaster进程是ApplicationMaster，将--properties-file作为参数传递，
+对于Executor需要的配置信息，则是Executor向Driver主动获取
+
+问题：--properties-file对应的配置文件是通过Hadoop的distributed case分发的，这个逻辑在哪里？
+
+
+提交ApplicationMaster的逻辑都是在yarn.Client类中完成的

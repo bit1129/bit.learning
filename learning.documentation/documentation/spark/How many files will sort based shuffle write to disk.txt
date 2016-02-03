@@ -1,0 +1,4 @@
+ShuffleMapTask个数个文件，
+
+
+比如sc.textFile("...", 7)则会产生7个文件，每个文件对应一个index文件，index文件记录了这个MapTask写数据的偏移量
