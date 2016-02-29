@@ -30,6 +30,6 @@ public class Student implements Comparable<Student> {
     }
 
     public int compareTo(Student o) {
-        return this.age - o.age;
+        return this.name.compareTo(o.name);
     }
 }
