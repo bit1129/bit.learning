@@ -11,7 +11,18 @@ public class AsyncCallTest {
 
         System.out.println("Begin to call AsyncRequestUtils.async:");
 
+
         AsyncRequestUtils.async(new URL("file:///" + path), new AsyncCallback() {
+            public void onSuccess(Object successResponse) {
+                System.out.println("onSuccess: \n" + successResponse);
+            }
+
+            public void onFailure(Object failResponse) {
+                System.out.println("onFailure: \n " + failResponse);
+            }
+        });
+
+        AsyncRequestUtilsUsingThreadPool.async(new URL("file:///" + path), new AsyncCallback() {
             public void onSuccess(Object successResponse) {
                 System.out.println("onSuccess: \n" + successResponse);
             }
