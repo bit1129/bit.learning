@@ -9,7 +9,7 @@ public class ORMapperTest {
 
         ORMapper<Student> mapper = ORMapperFactory.getMapper("student");
         for (String student : students) {
-            Student stu = mapper.map(student);
+//            Student stu = mapper.map(student);
         }
 
     }
