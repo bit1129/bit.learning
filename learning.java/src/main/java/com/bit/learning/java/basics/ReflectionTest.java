@@ -22,7 +22,12 @@ public class ReflectionTest {
     }
 
     public static void main(String[] args) throws Exception {
-        Class clazz = Class.forName("com.bit.learning.java.basics.ReflectionTest");
+        ClassLoader loader = ReflectionTest.class.getClassLoader();
+        if (loader == null) {
+            loader = Thread.currentThread().getContextClassLoader();
+        }
+
+        Class clazz = loader.loadClass("com.bit.learning.java.basics.ReflectionTest");
         Constructor c = clazz.getConstructor(String.class, Arg.class);
         ReflectionTest instance = (ReflectionTest) c.newInstance("Hello, World", new Arg("123"));
     }
