@@ -13,13 +13,14 @@ public class TryCatchFinally {
     }
 
     public static Integer testTryCatchFinally(Integer i) {
+
         try {
             int a = i + 10;
             return a;
         } catch (Exception e) {
             return -1;
         } finally {
-
+            System.out.println("Hello");
         }
     }
 }
