@@ -12,9 +12,11 @@
     http://www.springframework.org/schema/aop
     http://www.springframework.org/schema/aop/spring-aop.xsd"
        default-autowire="byName">
-    <context:component-scan base-package="com.bit.restlet.spring"/>
+    <context:component-scan base-package="com.bit"/>
     <aop:aspectj-autoproxy proxy-target-class="true"/>
     <context:annotation-config/>
+
+    <mvc:annotation-driven />
 
     <!-- 定义restlet application-->
 
