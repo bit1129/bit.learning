@@ -1,0 +1,33 @@
+1. 使用如下脚本启动spark的thrift server
+
+sbin/start-thriftserver.sh
+
+spark的thrift server默认监听端口是10000，这个跟hive的thrift server的监听端口是一样的
+
+
+2. 启动beeline
+bin/beeline
+在beeline>提示符下输入
+beeline>!connect jdbc:hive2://localhost:10000/default
+
+提示输入用户名：本地系统用户名
+密码为空(直接回车)
+
+建立链接成功，整个过程如下所示：
+
+beeline> !connect jdbc:hive2://localhost:10000
+Connecting to jdbc:hive2://localhost:10000
+Enter username for jdbc:hive2://localhost:10000: yuzt
+Enter password for jdbc:hive2://localhost:10000:
+16/03/16 13:25:02 INFO jdbc.Utils: Supplied authorities: localhost:10000
+16/03/16 13:25:02 INFO jdbc.Utils: Resolved authority: localhost:10000
+16/03/16 13:25:02 INFO jdbc.HiveConnection: Will try to open client transport with JDBC Uri: jdbc:hive2://localhost:10000
+Connected to: Spark SQL (version 1.6.1)
+Driver: Spark Project Core (version 1.6.1)
+Transaction isolation: TRANSACTION_REPEATABLE_READ
+0: jdbc:hive2://localhost:10000>
+
+
+可以输入SQL语句，类似spark-sql终端
+
+
