@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<allocations>
+  <queue name="jddp">
+    <minResources>10000 mb,5vcores</minResources>
+    <maxResources>344000 mb,300vcores</maxResources>
+    <maxRunningApps>30</maxRunningApps>
+    <weight>1</weight>
+    <schedulingPolicy>fair</schedulingPolicy>
+  </queue>
+  
+  <queue name="admin">
+    <!--minResources>10000 mb,5vcores</minResources-->
+    <!--maxResources>172000 mb,150vcores</maxResources-->
+    <maxRunningApps>100</maxRunningApps>
+    <weight>1</weight>
+    <schedulingPolicy>fair</schedulingPolicy>
+  </queue>
+  <userMaxAppsDefault>100</userMaxAppsDefault>
+
+</allocations>

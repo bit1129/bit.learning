@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+<!--
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License. See accompanying LICENSE file.
+-->
+<!-- Put site-specific property overrides in this file. -->
+<configuration>
+    <property>
+        <name>dfs.datanode.data.dir</name>
+        <value>/data1/hadoop,/data2/hadoop,/data3/hadoop,/data4/hadoop,/data5/hadoop,/data6/hadoop,/data7/hadoop,/data8/hadoop,/data9/hadoop,/data10/hadoop,/data11/hadoop,/data12/hadoop</value>
+        <description>
+            DataNode存放数据的目录，可以配置多个进行分流，每个DataNode上都应该有这些目录
+        </description>
+    </property>
+    <property>
+        <name>dfs.namenode.name.dir</name>
+        <value>/export/Data/hadoop/nn</value>
+        <description>
+            NameNode存放数据的目录，NameNode上需要有这个目录，而DataNode可以不存在
+        </description>
+    </property>
+    <property>
+        <name>dfs.datanode.max.transfer.threads</name>
+        <value>8192</value>
+    </property>
+    <property>
+        <name>dfs.namenode.handler.count</name>
+        <value>350</value>
+    </property>
+    <property>
+        <name>ipc.server.read.threadpool.size</name>
+        <value>20</value>
+    </property>
+    <property>
+        <name>dfs.datanode.du.reserved</name>
+        <value>5368709120</value>
+    </property>
+    <property>
+        <name>dfs.balance.bandwidthPerSec</name>
+        <value>104857600</value>
+    </property>
+    <property>
+        <name>dfs.namenode.checkpoint.period</name>
+        <!-- default 3600 seconds-->
+        <value>21600</value>
+    </property>
+    <property>
+        <name>dfs.namenode.num.extra.edits.retained</name>
+        <value>800000</value>
+    </property>
+    <property>
+        <name>dfs.image.compress</name>
+        <value>false</value>
+    </property>
+    <property>
+        <name>ha.health-monitor.rpc-timeout.ms</name>
+        <value>60000</value>
+    </property>
+    <property>
+        <name>ha.failover-controller.new-active.rpc-timeout.ms</name>
+        <value>75000</value>
+    </property>
+    <!--default 45000-->
+    <property>
+        <name>ha.health-monitor.rpc-timeout.ms</name>
+        <value>40960</value>
+    </property>
+    <property>
+        <name>ipc.ping.interval</name>
+        <value>5000</value>
+    </property>
+    <property>
+        <name>dfs.namenode.checkpoint.txns</name>
+        <!-- default 1000000-->
+        <value>6000000</value>
+    </property>
+    <property>
+        <name>dfs.image.transfer.timeout</name>
+        <value>1200000</value>
+    </property>
+    <property>
+        <name>dfs.namenode.replication.max-streams</name>
+        <value>10</value>
+    </property>
+    <property>
+        <name>dfs.namenode.replication.work.multiplier.per.iteration</name>
+        <value>10</value>
+    </property>
+    <property>
+        <name>dfs.namenode.checkpoint.check.period</name>
+        <value>14400</value>
+    </property>
+    <property>
+        <name>dfs.ha.log-roll.period</name>
+        <value>120</value>
+    </property>
+    <property>
+        <name>dfs.ha.automatic-failover.enabled</name>
+        <value>true</value>
+    </property>
+    <property>
+        <name>ha.zookeeper.quorum</name>
+        <value>MY-SERVER-94.COM:2181,MY-SERVER-95.COM:2181,MY-SERVER-96.COM:2181</value>
+    </property>
+    <property>
+        <name>dfs.nameservices</name>
+        <value>myFS</value>
+        <description>
+            DFS的别名
+        </description>
+    </property>
+    <property>
+        <name>dfs.ha.namenodes.myFS</name>
+        <value>nn1,nn2</value>
+    </property>
+    <property>
+        <name>dfs.ha.namenode.id</name>
+        <value>nn1</value>
+    </property>
+    <property>
+        <name>dfs.namenode.rpc-address.myFS.nn1</name>
+        <value>MY-SERVER-91.COM:8020</value>
+        <!--NameNode nn1的RPC端口，该NameNode运行在MY-SERVER-91.COM的8020端口-->
+    </property>
+    <property>
+        <name>dfs.namenode.rpc-address.myFS.nn2</name>
+        <value>MY-SERVER-92.COM:8020</value>
+        <!--NameNode nn2的RPC端口，该NameNode运行在MY-SERVER-92.COM的8020端口-->
+    </property>
+    <property>
+        <name>dfs.namenode.http-address.myFS.nn1</name>
+        <value>MY-SERVER-91.COM:50070</value>
+    </property>
+    <property>
+        <name>dfs.namenode.http-address.myFS.nn2</name>
+        <value>MY-SERVER-92.COM:50070</value>
+    </property>
+    <property>
+        <name>dfs.client.read.shortcircuit</name>
+        <value>true</value>
+    </property>
+    <property>
+        <name>dfs.domain.socket.path</name>
+        <value>/var/run/hadoop-hdfs/dn._PORT</value>
+    </property>
+    <property>
+        <name>dfs.client.file-block-storage-locations.timeout</name>
+        <value>3000</value>
+    </property>
+    <property>
+        <name>dfs.datanode.hdfs-blocks-metadata.enabled</name>
+        <value>true</value>
+    </property>
+    <property>
+        <name>dfs.webhdfs.enabled</name>
+        <value>true</value>
+    </property>
+    <!-- Hue HttpFS proxy user setting -->
+    <property>
+        <name>httpfs.proxyuser.hue.hosts</name>
+        <value>*</value>
+    </property>
+    <property>
+        <name>httpfs.proxyuser.hue.groups</name>
+        <value>*</value>
+    </property>
+    <property>
+        <name>dfs.client.socket-timeout</name>
+        <value>3600000</value>
+    </property>
+    <property>
+        <name>dfs.socket.timeout</name>
+        <value>3600000</value>
+    </property>
+    <property>
+        <name>dfs.datanode.socket.write.timeout</name>
+        <value>3600000</value>
+    </property>
+    <property>
+        <name>dfs.datanode.handler.count</name>
+        <value>20</value>
+    </property>
+</configuration>

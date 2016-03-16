@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+<!-- Put site-specific property overrides in this file. -->
+<configuration>
+  <property>
+    <name>mapreduce.framework.name</name>
+    <value>yarn</value>
+  </property>
+  <property>
+    <name>mapreduce.jobhistory.address</name>
+    <value>0.0.0.0:10020</value>
+    <!--0.0.0.0表示什么意思？-->
+  </property>
+  <property>
+    <name>mapreduce.jobhistory.webapp.address</name>
+    <value>0.0.0.0:19888</value>
+    <!--0.0.0.0表示什么意思？-->
+  </property>
+  <property>
+    <name>mapreduce.jobhistory.intermediate-done-dir</name>
+    <value>/tmp/mr-history/tmp</value>
+  </property>
+  <property>
+    <name>mapreduce.jobhistory.done-dir</name>
+    <value>/tmp/mr-history/done</value>
+  </property>
+  <property>
+    <name>mapred.system.dir</name>
+    <value>/data1/mr/system,/data2/mr/system,/data3/mr/system,/data4/mr/system,/data5/mr/system,/data6/mr/system,/data7/mr/system,/data8/mr/system,/data9/mr/system,/data10/mr/system,/data11/mr/system,/data12/mr/system</value>
+  </property>
+  <property>
+    <name>mapreduce.reduce.shuffle.memory.limit.percent</name>
+    <value>0.10</value>
+  </property>
+  <property>
+    <name>mapred.local.dir</name>
+    <value>/data1/mr/local,/data2/mr/local,/data3/mr/local,/data4/mr/local,/data5/mr/local,/data6/mr/local,/data7/mr/local,/data8/mr/local,/data9/mr/local,/data10/mr/local,/data11/mr/local,/data12/mr/local</value>
+  </property>
+  <property>
+    <name>mapred.child.env</name>
+    <value>LD_LIBRARY_PATH=/usr/lib/hadoop/lib/native</value>
+  </property>
+</configuration>
