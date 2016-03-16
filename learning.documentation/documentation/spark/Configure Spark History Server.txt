@@ -1,1 +1,20 @@
 Spark History Server加YARN History Server配置
+
+在spark-defaults.conf文件中，添加如下内容：
+
+spark.eventLog.enabled true
+spark.eventLog.dir hdfs://localhost:9000/SparkEventLog
+spark.history.ui.port 18080
+spark.history.retainedApplications 200
+spark.yarn.historyServer.address localhost:18080
+
+spark.yarn.historyServer.address是host:port格式，用于向yarn提交任务时，yarn将ApplicationMaster的UI转向该地址
+spark.eventLog.dir是存放Spark应用数据的地址，以hdfs://开头，没测试过不以hdfs://开头的结果
+
+启动Spark History Server
+sbin/start-history-server.sh hdfs://localhost:9000/SparkEventLog
+
+就是说，启动history server时，需要指定event log的HDFS的目录地址
+
+参考：http://www.aboutyun.com/thread-8850-1-1.html
+
