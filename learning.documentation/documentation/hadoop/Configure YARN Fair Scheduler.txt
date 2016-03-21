@@ -1,0 +1,47 @@
+1. 在yarn-site.xml中指定使用公平调度器的配置
+
+  <property>
+    <name>yarn.resourcemanager.scheduler.class</name>
+    <value>org.apache.hadoop.yarn.server.resourcemanager.scheduler.fair.FairScheduler</value>
+  </property>
+  <property>
+    <name>yarn.scheduler.fair.user-as-default-queue</name>
+    <value>false</value>
+  </property>
+  <property>
+    <name>yarn.scheduler.fair.allocation.file</name>
+    <value>fair-scheduler.xml</value>
+  </property>
+
+
+2. 在etc/hadoop目录下创建fair-site.xml文件，指定了两个队列mapreduce和spark两个队列，每个队列
+的最大资源是2G内存和2个core
+
+<?xml version="1.0"?>
+<allocations>
+  <queue name="mapreduce">
+    <maxResources>2048 mb,2vcores</maxResources>
+    <maxRunningApps>10</maxRunningApps>
+    <weight>2.0</weight>
+    <schedulingPolicy>fair</schedulingPolicy>
+  </queue>
+  <queue name="spark">
+    <maxResources>2048 mb,2vcores</maxResources>
+    <maxRunningApps>10</maxRunningApps>
+    <weight>2.0</weight>
+    <schedulingPolicy>fair</schedulingPolicy>
+  </queue>
+
+
+  <fairSharePreemptionTimeout>30</fairSharePreemptionTimeout>
+</allocations>
+
+3. 启动spark shell
+bin/spark-shell --master yarn-client --queue spark --num-executors 2 --executor-memory 3g
+
+问题：为什么spark shell能够启动？因为spark shell这个application的资源需求并没有得到满足？
+查看Spark的WEB-UI看到：
+
+a.只有一个executor启动，使用了1983M内存（executor默认是1G，此处指定了3g，因此不够一个executor分配的，但是还是启动了）
+b.driver内存是511.5M内存 （如果不指定Driver内存，应该默认是1G？是的！）
+为什么显示是511.5M内存？
