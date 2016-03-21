@@ -1,0 +1,11 @@
+默认情况下，每次提交spark application时，都会将spark assembly jar提交到HDFS上，这影响了Spark提交作业的启动时间
+Spark提供了一个配置项，使得可以预先将Spark的assembly jar提交
+
+在spark-defaults.conf文件中添加如下一行：
+
+spark.yarn.jar=hdfs://hadoop.bit.com:9000/spark-assembly-1.6.1-hadoop2.6.0.jar
+
+通过下面的语句将spark的assembly jar提交到HDFS上
+
+
+hdfs dfs -put $SPARK_HOME/lib/spark-assembly-1.6.1-hadoop2.6.0.jar /

@@ -1,0 +1,34 @@
+当Executor进程被杀死时，如何重启Executor？
+
+./spark-shell --master yarn-client --num-executors 2 --executor-memory 512m
+
+上面启动了两个executor，jps可以看到启动的两个ExecutorBackend进程，使用kill -9 杀掉一个，控制台上打印的日志是：
+
+
+
+scala> 16/03/21 16:15:44 INFO cluster.YarnClientSchedulerBackend: Disabling executor 1.
+16/03/21 16:15:44 INFO scheduler.DAGScheduler: Executor lost: 1 (epoch 0)
+16/03/21 16:15:44 INFO storage.BlockManagerMasterEndpoint: Trying to remove executor 1 from BlockManagerMaster.
+16/03/21 16:15:44 INFO storage.BlockManagerMasterEndpoint: Removing block manager BlockManagerId(1, 10.12.167.42, 38324)
+16/03/21 16:15:44 INFO storage.BlockManagerMaster: Removed 1 successfully in removeExecutor
+16/03/21 16:15:45 ERROR cluster.YarnScheduler: Lost executor 1 on 10.12.167.42: Container marked as failed: container_1458528456182_0012_01_000002 on host: yuzt-Aspire-TC-606. Exit status: 137. Diagnostics: Container killed on request. Exit code is 137
+Container exited with a non-zero exit code 137
+Killed by external signal
+
+16/03/21 16:15:45 WARN cluster.YarnSchedulerBackend$YarnSchedulerEndpoint: Container marked as failed: container_1458528456182_0012_01_000002 on host: yuzt-Aspire-TC-606. Exit status: 137. Diagnostics: Container killed on request. Exit code is 137
+Container exited with a non-zero exit code 137
+Killed by external signal
+
+16/03/21 16:15:45 INFO cluster.YarnClientSchedulerBackend: Asked to remove non-existent executor 1
+16/03/21 16:15:51 INFO cluster.YarnClientSchedulerBackend: Registered executor NettyRpcEndpointRef(null) (10.12.167.42:42745) with ID 3
+16/03/21 16:15:51 INFO storage.BlockManagerMasterEndpoint: Registering block manager 10.12.167.42:55759 with 143.6 MB RAM, BlockManagerId(3, 10.12.167.42, 55759)
+
+从日志中可以看到：
+
+1. YarnClientSchedulerBackend首先得到executor死亡的消息
+2. DAGScheduler收到Executor Lost的消息
+3. 然后将Executor的BlockManager从BlockManagerMaster中干掉
+4. YarnScheduler收到Lost executor消息
+5. YarnSchedulerBackend$YarnSchedulerEndpoint将失败的Container关闭
+6. YarnClientSchedulerBackend删除和重新注册
+7. 重新注册新Executor的BlockManager

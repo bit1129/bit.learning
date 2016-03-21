@@ -1,0 +1,9 @@
+Spark Driver和Executor的默认内存是1G，而执行如下的命令后，UI上显示，Executor的storage 内存是511M，这是为什么？
+
+bin/spark-shell --master yarn-client
+
+因为首先预留了300M给系统，然后安全系数为0.8，这时是（1024-300）×0.8=560
+
+因为Executor的Storage Memory是560M减去on heap的execution memory，因此结果大约为511M
+
+

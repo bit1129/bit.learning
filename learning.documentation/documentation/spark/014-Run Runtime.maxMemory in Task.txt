@@ -1,0 +1,13 @@
+启动spark-shell，
+./spark-shell --master yarn-client --executor-memory 1024m
+
+
+执行如下语句：
+sc.parallelize(List(1)).map(x=>Runtime.getRuntime().maxMemory/1024/1024).collect.foreach(println);
+
+得到的结果是982M，可见executor-memory被限制在1G，
+
+
+问题：这个限制是在那里做的？启动ExecutorBackend进程时，内存是怎么设置上的？这个得设置JVM的一些内存选项
+
+
