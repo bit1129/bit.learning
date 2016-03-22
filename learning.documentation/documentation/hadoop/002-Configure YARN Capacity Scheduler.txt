@@ -1,0 +1,52 @@
+1. 在yarn-site.xml中做如下配置：
+
+ <property>
+        <name>yarn.resourcemanager.scheduler.class</name>
+        <value>org.apache.hadoop.yarn.server.resourcemanager.scheduler.capacity.CapacityScheduler</value>
+ </property>
+
+
+说明：在yarn-site.xml中不需要指定capacity-scheduler.xml文件，因为Capacity Scheduler默认使用conf/capacity-scheduler.xml文件
+
+
+2. 在etc/hadoop下创建capacity-scheduler.xml文件，添加如下内容：
+
+
+<configuration>
+ <property>
+        <name>yarn.scheduler.capacity.root.queues</name>
+        <value>alpha,beta,default</value>
+ </property>
+ <property>
+        <name>yarn.scheduler.capacity.root.alpha.capacity</name>
+        <value>50</value>
+ </property>
+ <property>
+        <name>yarn.scheduler.capacity.root.alpha.queues</name>
+        <value>a1,a2</value>
+ </property>
+ <property>
+        <name>yarn.scheduler.capacity.root.alpha.a1.capacity</name>
+        <value>60</value>
+ </property>
+ <property>
+        <name>yarn.scheduler.capacity.root.alpha.a2.capacity</name>
+        <value>40</value>
+ </property>
+ <property>
+        <name>yarn.scheduler.capacity.root.beta.capacity</name>
+        <value>30</value>
+ </property>
+ <property>
+        <name>yarn.scheduler.capacity.root.default.capacity</name>
+        <value>20</value>
+ </property>
+</configuration>
+
+
+---提交Spark作业到YARN
+./spark-shell --master yarn-client --num-executors 2 --executor-memory 1G --queue root.alpha.a1
+
+如上语句提示root.alpha.a1这个队列找不到，原因是什么？直接指定a1则是正确的。a1队列的容量是1G，1core，而上面spark应用使用了3个core，3G内存
+
+
