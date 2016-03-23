@@ -1,0 +1,24 @@
+1. 启动Hive Thrift Server的命令
+第一种方法：使用hiveserver2命令，同时指定hive server2的端口，这里指定为20001
+bin/hiveserver2 -hiveconf hive.server2.thrift.port=20001
+
+第二种方法：
+bin/hive --service hiveserver2 -hiveconf hive.server2.thrift.port=20001
+
+也就是说bin/hiveserver2是bin/hive --service hiveserver2的快捷方式，vim hiveserver2也可以看到，其实它调用的是第一种方法
+
+vim bin/hiveserver2
+
+bin=`dirname "$0"`
+bin=`cd "$bin"; pwd`
+
+. "$bin"/hive --service hiveserver2 "$@"
+
+
+2. 使用Beeline连接到Hive Thrift Server
+
+a.bin/beeline 回车
+b. beeline>!connect jdbc:hive2://localhost:20001/default
+c.输入用户名(系统用户名)
+d.输入密码（不输入，直接回车)
+e.可以输入SQL进行操作
