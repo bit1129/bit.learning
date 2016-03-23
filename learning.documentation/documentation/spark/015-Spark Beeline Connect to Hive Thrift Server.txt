@@ -1,0 +1,22 @@
+首先参考007_Start Hive Thrift Server.txt启动Hive Thrift Server（启动的Thrift Server的端口是20001）
+
+启动Spark Beeline的方法和使用Beeline进行查询的步骤跟007_Start Hive Thrift Server.txt描述的完全一样，
+也就是说，Spark的Beeline作为客户端和Hive Thrift Server是完全可以相互操作的
+
+
+yuzt@yuzt-Aspire-TC-606:~/software/bigdata/spark-1.6.1-bin-hadoop2.6/bin$ ls
+beeline      derby.log           load-spark-env.sh  pyspark2.cmd  run-example       run-example.cmd  spark-class2.cmd  sparkR       sparkR.cmd   spark-shell2.cmd  spark-sql     spark-submit2.cmd  xyz.log
+beeline.cmd  load-spark-env.cmd  pyspark            pyspark.cmd   run-example2.cmd  spark-class      spark-class.cmd   sparkR2.cmd  spark-shell  spark-shell.cmd   spark-submit  spark-submit.cmd
+yuzt@yuzt-Aspire-TC-606:~/software/bigdata/spark-1.6.1-bin-hadoop2.6/bin$ ./beeline
+Beeline version 1.6.1 by Apache Hive
+beeline> !connect jdbc:hive2://localhost:20001/default
+Connecting to jdbc:hive2://localhost:20001/default
+Enter username for jdbc:hive2://localhost:20001/default: yuzt
+Enter password for jdbc:hive2://localhost:20001/default:
+16/03/23 13:42:39 INFO jdbc.Utils: Supplied authorities: localhost:20001
+16/03/23 13:42:39 INFO jdbc.Utils: Resolved authority: localhost:20001
+16/03/23 13:42:39 INFO jdbc.HiveConnection: Will try to open client transport with JDBC Uri: jdbc:hive2://localhost:20001/default
+Connected to: Apache Hive (version 1.2.1)
+Driver: Spark Project Core (version 1.6.1)
+Transaction isolation: TRANSACTION_REPEATABLE_READ
+0: jdbc:hive2://localhost:20001/default> select * from lzo;
