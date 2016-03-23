@@ -1,0 +1,83 @@
+参考文章：http://www.aboutyun.com/thread-8150-1-1.html
+
+1. 配置mapred-site.xml
+    <property>
+        <name>mapreduce.jobhistory.address</name>
+        <value>hadoop.bit.com:10020</value>
+    </property>
+
+    <property>
+        <name>mapreduce.jobhistory.webapp.address</name>
+        <value>hadoop.bit.com:19888</value>
+    </property>
+
+    <property>
+        <name>yarn.app.mapreduce.am.staging-dir</name>
+        <value>/tmp/hadoop-yarn/staging</value>
+    </property>
+
+    <property>
+        <name>mapreduce.jobhistory.done-dir</name>
+        <value>${yarn.app.mapreduce.am.staging-dir}/history/done</value>
+    </property>
+
+    <property>
+        <name>mapreduce.jobhistory.intermediate-done-dir</name>
+        <value>${yarn.app.mapreduce.am.staging-dir}/history/done_intermediate</value>
+    </property>
+
+
+
+2. 启动MR Job History Server
+sbin/mr-jobhistory-daemon.sh start historyserver
+
+
+3. 执行一个MR任务或者在Hive上执行select count(1) from my_table那么会在history ui上看到任务历史，在hdfs上有如下内容
+
+
+yuzt@yuzt-Aspire-TC-606:~/software/bigdata/hadoop-2.6.3$ hdfs dfs -ls /tmp
+Found 6 items
+-rw-r--r--   1 yuzt supergroup         10 2016-02-03 13:39 /tmp/fs123.txt
+drwx------   - yuzt supergroup          0 2016-03-23 13:16 /tmp/hadoop-yarn
+drwx-wx-wx   - yuzt supergroup          0 2016-02-01 15:20 /tmp/hive
+drwxrwxrwt   - yuzt supergroup          0 2016-01-11 17:11 /tmp/logs
+-rw-r--r--   1 yuzt supergroup   58301969 2016-01-09 10:17 /tmp/part-00000
+drwxr-xr-x   - yuzt supergroup          0 2016-01-24 14:31 /tmp/spark_event_log
+yuzt@yuzt-Aspire-TC-606:~/software/bigdata/hadoop-2.6.3$ hdfs dfs -ls /tmp/hadoop-yarn
+Found 2 items
+drwx------   - yuzt supergroup          0 2016-01-08 14:58 /tmp/hadoop-yarn/staging
+drwxr-xr-x   - yuzt supergroup          0 2016-03-23 13:16 /tmp/hadoop-yarn/staging
+
+yuzt@yuzt-Aspire-TC-606:~/software/bigdata/hadoop-2.6.3$ hdfs dfs -ls /tmp/hadoop-yarn/staging
+Found 2 items
+drwxr-xr-x   - yuzt supergroup          0 2016-01-11 17:06 /tmp/hadoop-yarn/staging/history
+drwx------   - yuzt supergroup          0 2016-01-08 14:58 /tmp/hadoop-yarn/staging/yuzt
+yuzt@yuzt-Aspire-TC-606:~/software/bigdata/hadoop-2.6.3$ hdfs dfs -ls /tmp/hadoop-yarn/staging/history
+Found 2 items
+drwxrwx---   - yuzt supergroup          0 2016-01-11 17:12 /tmp/hadoop-yarn/staging/history/done
+drwxrwxrwt   - yuzt supergroup          0 2016-01-08 14:58 /tmp/hadoop-yarn/staging/history/done_intermediate
+yuzt@yuzt-Aspire-TC-606:~/software/bigdata/hadoop-2.6.3$ hdfs dfs -ls /tmp/hadoop-yarn/staging/history/done
+Found 1 items
+drwxrwx---   - yuzt supergroup          0 2016-03-23 13:19 /tmp/hadoop-yarn/staging/history/done/2016
+yuzt@yuzt-Aspire-TC-606:~/software/bigdata/hadoop-2.6.3$ hdfs dfs -ls /tmp/hadoop-yarn/staging/history/done/2016
+Found 2 items
+drwxrwx---   - yuzt supergroup          0 2016-01-12 10:09 /tmp/hadoop-yarn/staging/history/done/2016/01
+drwxrwx---   - yuzt supergroup          0 2016-03-23 13:19 /tmp/hadoop-yarn/staging/history/done/2016/03
+yuzt@yuzt-Aspire-TC-606:~/software/bigdata/hadoop-2.6.3$ hdfs dfs -ls /tmp/hadoop-yarn/staging/history/done/2016/01
+Found 4 items
+drwxrwx---   - yuzt supergroup          0 2016-03-23 13:17 /tmp/hadoop-yarn/staging/history/done/2016/01/08
+drwxrwx---   - yuzt supergroup          0 2016-03-23 13:17 /tmp/hadoop-yarn/staging/history/done/2016/01/09
+drwxrwx---   - yuzt supergroup          0 2016-03-23 13:17 /tmp/hadoop-yarn/staging/history/done/2016/01/11
+drwxrwx---   - yuzt supergroup          0 2016-03-23 13:17 /tmp/hadoop-yarn/staging/history/done/2016/01/12
+
+
+
+
+
+
+
+
+
+
+
+
