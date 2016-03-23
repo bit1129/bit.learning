@@ -1,0 +1,23 @@
+参考文章：
+
+1. http://www.linuxidc.com/Linux/2013-01/78397.htm
+2. http://www.iteblog.com/archives/992
+下面的文章没有用到，不过应该很有用（尤其是验证成功的办法）
+3.http://blog.csdn.net/zuochanxiaoheshang/article/details/12843725
+
+按照在第一篇文章中，执行如下如下命令：
+
+apt-get install gcc
+apt-get install lzop
+
+然后参考文章2，从第一步开始做起（
+注意：在第一步并没有执行如下的命令安装lzo的编译环境:
+[wyp@master ~]$ yum -y install  lzo-devel  zlib-devel  gcc autoconf automake libtool
+
+第三篇文章说了在Ubuntu系统上安装lzo编译环境的方法
+
+
+
+)
+
+
