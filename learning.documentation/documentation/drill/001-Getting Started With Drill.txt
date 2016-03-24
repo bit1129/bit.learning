@@ -1,0 +1,158 @@
+1. Apache Calcite 介绍
+http://blog.csdn.net/yunlong34574/article/details/46375733
+内容：
+a. Apache Calcite介绍
+b. 怎么基于Apache Calcite编写SQL on JavaBeans
+c. Drill的逻辑结构图
+
+总结：有了Calcite就有了前端的SQL接口了，然后增加上ZooKeeper，分布式的执行引擎和对应的Adapter，以及存储层的接口，就完成了一个分布式SQL执行引擎。其实这就是Apache Drill做的事情。Calcite中就有Spark与Calcite对接的部分代码，如果底层使用Spark那么，给Spark带来的就是ANSI 2003 SQL标准的接口了。对现在的状况会有很大的改善。
+
+2. Drill编译器结构：
+http://www.liuhaihua.cn/archives/2319.html
+
+3. Drill源码剖析
+http://www.liuhaihua.cn/archives/102356.html
+
+4.启动Drill Embedded模式：
+http://drill.apache.org/docs/starting-drill-on-linux-and-mac-os-x/
+
+5.启动Drill Web Console:
+http://drill.apache.org/docs/starting-the-web-console/
+默认端口号是8047（访问地址：http://localhost:8047/）
+
+
+6.Drill有哪些Storage Plugin：
+Drill内置了如下Storage Plugin
+cp
+dfg
+hbase
+hive
+kudu
+mongo
+s3
+Drill支持Storage Plugin扩展
+
+更新Storage Plugin的方法
+http://drill.apache.org/docs/plugin-configuration-basics/#using-the-drill-web-console
+
+
+
+7. Drill Embedded查询Hive表的步骤
+http://drill.apache.org/docs/hive-storage-plugin/
+http://drill.apache.org/docs/querying-hive/
+http://drill.apache.org/docs/use/
+a.启用Hive Storage Plugin
+在http://localhost:8047/上编辑hive storage plugin
+
+{
+  "type": "hive",
+  "enabled": true,
+  "configProps": {
+    "hive.metastore.uris": "thrift://localhost:9083",
+    "javax.jdo.option.ConnectionURL": "jdbc:mysql://127.0.0.1:3306/hive_metastore?createDatabaseIfNotExist=true&amp;characterEncoding=UTF-8&amp;useUnicode=true",
+    "hive.metastore.warehouse.dir": "/user/hive/warehouse",
+    "fs.default.name": "hdfs://hadoop.bit.com:9000",
+    "hive.metastore.sasl.enabled": "false"
+  }
+}
+
+b.执行bin/drill-embeded命令进行0: jdbc:drill:zk=local> 命令行模式
+c.输入show schemas命令，可以看到列出的启动的storage plugin的schema信息
+d.输入命令use hive就可以执行hive库的查询了
+
+说明：这里的hive指的是数据源的名称，比如
+
+
+
+
+
+
+
+
+8.什么是Drillbit？
+
+
+9. Drill的系统架构图是怎么样的？伪分布式和真正分布式
+
+
+10.什么是Drill的Plugin？
+
+
+11. Drill系列博客
+https://segmentfault.com/t/apache-drill/blogs
+https://segmentfault.com/t/drill/blogs
+
+
+12.省略schema
+0: jdbc:drill:zk=local> select * from dfs.`/home/yuzt/software/devsoftware/apache-drill-1.6.0/sample-data/region.parquet`;
+可以改写为：
+0: jdbc:drill:zk=local>use dfs;
+0: jdbc:drill:zk=local> select * from `/home/yuzt/software/devsoftware/apache-drill-1.6.0/sample-data/region.parquet`;
+
+注意：``不能省略
+
+13. 问题：
+在WEB UI上可以看到，dfs storage plugin默认使用的本地文件路径file:///
+如何查询HDFS上的数据？
+
+创建基于HDFS的Storage Plugin，参考：http://drill.apache.org/docs/file-system-storage-plugin/
+
+{
+  "type": "file",
+  "enabled": true,
+  "connection": "hdfs://hadoop.bit.com:9000/",
+  "config": null,
+  "workspaces": {
+    "root": {
+      "location": "/",
+      "writable": true,
+      "defaultInputFormat": null
+    },
+    "user": {
+      "location": "/user",
+      "writable": true,
+      "defaultInputFormat": null
+    }
+  },
+  "formats": {
+    "json": {
+      "type": "json",
+      "extensions": [
+        "json"
+      ]
+    }
+  }
+}
+
+在命令行终端执行：show schemas可以看到hdfs这个schema
+
+上传文件到HDFS， hdfs dfs -put /home/yuzt/development/openprojects/spark-2.0.0-snapshot/examples/src/main/resources/people.json /
+执行查询：
+select * from hdfs.`/people.json`
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
