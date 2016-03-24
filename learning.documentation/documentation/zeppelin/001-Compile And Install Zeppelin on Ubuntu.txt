@@ -1,0 +1,22 @@
+1. 从github上下载zeppelin源代码，使用如下命令进行编译，
+mvn package -Pspark-1.6 -Dhadoop.version=2.6.0 -Phadoop-2.6 -DskipTests
+
+
+编译结果显示web Application模块编译失败，原因如下
+
+[INFO] --- maven-enforcer-plugin:1.3.1:enforce (enforce) @ zeppelin-web ---
+[INFO]
+[INFO] --- frontend-maven-plugin:0.0.25:install-node-and-npm (install node and npm) @ zeppelin-web ---
+[INFO] Node v0.10.22 is already installed.
+[INFO] Found NPM version 1.3.8
+[INFO]
+[INFO] --- frontend-maven-plugin:0.0.25:npm (npm install) @ zeppelin-web ---
+[INFO] Running 'npm install --color=false' in /home/yuzt/software/devsoftware/incubator-zeppelin-master/zeppelin-web
+
+[ERROR] Failed to execute goal com.github.eirslett:frontend-maven-plugin:0.0.25:npm (npm install) on project zeppelin-web: Failed to run task: 'npm install --color=false' failed. (error code 27) -> [Help 1]
+
+这个错表示需要使用sudo命令执行，即：
+sudo mvn package -Pspark-1.6 -Dhadoop.version=2.6.0 -Phadoop-2.6 -DskipTests
+
+参考：http://stackoverflow.com/questions/30858060/zeppelin-build-failure
+
