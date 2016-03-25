@@ -1,0 +1,11 @@
+参考资料：
+https://www.mapr.com/blog/apache-drill-architecture-ultimate-guide
+
+
+Drill uses its own SQL execution engine, and does not rely on MapReduce, Spark or Tez like other SQL on Hadoop solutions.
+
+Drill术语：
+1. Drillbit
+Drill集群是由运行在每个节点的Drillbit Service组成，这些Drillbit之间没有Master-Slave关系，他们通过ZK发现和相互通信
+
+Drillbit接收客户端发送的SQL，然后调用Drill Parser进行解析，然后转换为

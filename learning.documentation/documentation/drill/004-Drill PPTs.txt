@@ -1,0 +1,4 @@
+http://cdn.oreillystatic.com/en/assets/1/event/91/An%20Introduction%20to%20Apache%20Drill%20Presentation.pdf
+https://2014.nosql-matters.org/dub/wp-content/uploads/2013/02/nosql_matters_dublin_2014_apache_drill.pdf
+https://www.mapr.com/sites/default/files/apache_drill_interactive_ad-hoc_query_at_scale-hausenblas_nadeau1.pdf
+http://wiki.apache.org/incubator/DrillProposal?action=AttachFile&do=get&target=Drill+slides.pdf

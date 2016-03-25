@@ -1,3 +1,23 @@
+0. 参考资料：
+http://drill.apache.org/docs/architecture-introduction/
+https://www.mapr.com/blog/apache-drill-architecture-ultimate-guide
+http://www.slideshare.net/Hadoop_Summit/understanding-the-value-and-architecture-of-apache-drill
+源码剖析
+https://segmentfault.com/t/apache-drill/blogs
+https://segmentfault.com/t/drill/blogs
+https://segmentfault.com/a/1190000002912140
+http://yangyoupeng-cn-fujitsu-com.iteye.com/blog/1974556
+https://segmentfault.com/blog/drilldexuexi
+http://www.confusedcoders.com/category/bigdata/apache-drill
+http://www.confusedcoders.com/bigdata/apache-drill/understanding-apache-drill-logical-plan
+https://segmentfault.com/a/1190000004325125
+https://segmentfault.com/a/1190000004313643
+
+https://www.mapr.com/blog/comparing-sql-functions-and-performance-apache-spark-and-apache-drill
+https://www.mapr.com/blog/apache-spark-vs-apache-drill
+https://www.dezyre.com/article/spark-sql-vs-apache-drill-war-of-the-sql-on-hadoop-tools/234
+
+
 1. Apache Calcite 介绍
 http://blog.csdn.net/yunlong34574/article/details/46375733
 内容：
@@ -78,9 +98,7 @@ d.输入命令use hive就可以执行hive库的查询了
 10.什么是Drill的Plugin？
 
 
-11. Drill系列博客
-https://segmentfault.com/t/apache-drill/blogs
-https://segmentfault.com/t/drill/blogs
+
 
 
 12.省略schema
@@ -126,11 +144,72 @@ https://segmentfault.com/t/drill/blogs
 
 在命令行终端执行：show schemas可以看到hdfs这个schema
 
-上传文件到HDFS， hdfs dfs -put /home/yuzt/development/openprojects/spark-2.0.0-snapshot/examples/src/main/resources/people.json /
-执行查询：
+上传文件到HDFS，
+hdfs dfs -put /home/yuzt/development/openprojects/spark-2.0.0-snapshot/examples/src/main/resources/people.json /
+hdfs dfs -put /home/yuzt/development/openprojects/spark-2.0.0-snapshot/examples/src/main/resources/people.json /user
+
+如下语句正确执行，如下语句应该等价于：select * from hdfs.`root`.`/people.json`
 select * from hdfs.`/people.json`
 
+如下语句失败：
+select * from hdfs.`/people.json`
+正确的写法是,如下操作是从/user/people.json读取数据
+select * from hdfs.`user`.`/people.json`
 
+
+14. Drill查询HBase数据库
+
+
+15. order by group by语句
+
+select name, avg(age) from hdfs.`/people.json` group by name order by name limit 2
+
+查询的物理计划：
+00-00    Screen : rowType = RecordType(ANY name, ANY EXPR$1): rowcount = 2.0, cumulative cost = {8.2 rows, 31.2 cpu, 0.0 io, 0.0 network, 16.0 memory}, id = 2136
+00-01      Project(name=[$0], EXPR$1=[$1]) : rowType = RecordType(ANY name, ANY EXPR$1): rowcount = 2.0, cumulative cost = {8.0 rows, 31.0 cpu, 0.0 io, 0.0 network, 16.0 memory}, id = 2135
+00-02        SelectionVectorRemover : rowType = RecordType(ANY name, ANY EXPR$1): rowcount = 2.0, cumulative cost = {8.0 rows, 31.0 cpu, 0.0 io, 0.0 network, 16.0 memory}, id = 2134
+00-03          Limit(fetch=[2]) : rowType = RecordType(ANY name, ANY EXPR$1): rowcount = 2.0, cumulative cost = {6.0 rows, 29.0 cpu, 0.0 io, 0.0 network, 16.0 memory}, id = 2133
+00-04            SelectionVectorRemover : rowType = RecordType(ANY name, ANY EXPR$1): rowcount = 1.0, cumulative cost = {4.0 rows, 21.0 cpu, 0.0 io, 0.0 network, 16.0 memory}, id = 2132
+00-05              TopN(limit=[2]) : rowType = RecordType(ANY name, ANY EXPR$1): rowcount = 1.0, cumulative cost = {3.0 rows, 20.0 cpu, 0.0 io, 0.0 network, 16.0 memory}, id = 2131
+00-06                StreamAgg(group=[{0}], EXPR$1=[MAX($1)]) : rowType = RecordType(ANY name, ANY EXPR$1): rowcount = 1.0, cumulative cost = {2.0 rows, 16.0 cpu, 0.0 io, 0.0 network, 16.0 memory}, id = 2130
+00-07                  Sort(sort0=[$0], dir0=[ASC]) : rowType = RecordType(ANY name, ANY age): rowcount = 1.0, cumulative cost = {1.0 rows, 0.0 cpu, 0.0 io, 0.0 network, 16.0 memory}, id = 2129
+00-08                    Scan(groupscan=[EasyGroupScan [selectionRoot=hdfs://hadoop.bit.com:9000/people.json, numFiles=1, columns=[`name`, `age`], files=[hdfs://hadoop.bit.com:9000/people.json]]]) : rowType = RecordType(ANY name, ANY age): rowcount = 1.0, cumulative cost = {0.0 rows, 0.0 cpu, 0.0 io, 0.0 network, 0.0 memory}, id = 2128
+
+
+15. Drill怎么查询HBase？
+a. 启动HBase，Zookeeper使用内置的, HBase的WEB UI地址是多少？http://localhost:16010
+b. 在Drill的web ui上更新Hbase Storage plugin的配置
+{
+  "type": "hbase",
+  "config": {
+    "hbase.zookeeper.quorum": "localhost",
+    "hbase.zookeeper.property.clientPort": "2181"
+  },
+  "size.calculator.enabled": false,
+  "enabled": true
+}
+
+c. 假如HBase中有表t1,那么可以做如下查询
+select * from hbase.`t1`
+
+
+16. 一句话介绍Drill和Spark
+Apache Drill – an open source, low latency SQL query engine for Hadoop and NoSQL.
+Apache Spark – a general-purpose engine for large-scale data processing.
+
+17. Drill Join
+0: jdbc:drill:zk=local> select a.full_name from cp.`employee.json` as a join cp.`employee.json` as b on a.employee_id = b.employee_id limit 3 ;
+
+上面是两个表进行self join
+
+18. Performance between Drill and Spark
+https://www.mapr.com/blog/comparing-sql-functions-and-performance-apache-spark-and-apache-drill
+https://github.com/m-kiuchi/MovieLensSQL
+
+19. 使用sqlline启动Drill
+./sqlline -u jdbc:drill:zk=local
+
+-u表示jdbc的url，对于Drill而言，它的jdbc串是jdbc:drill.zk
 
 
 
