@@ -1,0 +1,11 @@
+参考：http://www.iteblog.com/archives/960
+
+官方文档：http://hadoop.apache.org/docs/r2.7.2/hadoop-yarn/hadoop-yarn-site/ResourceManagerRest.html
+
+1. 查询指定application的状态，返回的是JSON数据
+http://host.domain.com:8088/ws/v1/cluster/apps/application_1326821518301_0010
+其中ws,v1，cluster，apps都是固定的URL segments
+application_1326821518301_0010表示applicationID
+
+2. 如何查看一个application运行结束时的counter信息
+TBD
