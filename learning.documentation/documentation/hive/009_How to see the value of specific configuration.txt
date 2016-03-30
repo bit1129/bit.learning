@@ -1,0 +1,5 @@
+hive -e "set" | grep convertion
+如上是shell终端执行hive命令
+结果是
+hive.fetch.task.conversion=more
+hive.fetch.task.conversion.threshold=1073741824

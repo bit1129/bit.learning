@@ -1,0 +1,10 @@
+hive.fetch.task.conversion=more
+hive.fetch.task.conversion.threshold=1073741824
+
+
+1073741824=1G
+
+1. hive.fetch.task.conversion设置为more，表示对于简单的select查询，不需要启动MR任务
+2. hive.fetch.task.conversion设置为none，表示对于简单的select查询也需要启动MR任务
+3. hive.fetch.task.conversion.threshold表示在hive.fetch.task.conversion为more的情况下，select多大数据量会启动MR任务，
+默认是1G

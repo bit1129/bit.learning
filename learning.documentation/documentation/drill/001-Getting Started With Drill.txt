@@ -211,6 +211,19 @@ https://github.com/m-kiuchi/MovieLensSQL
 
 -u表示jdbc的url，对于Drill而言，它的jdbc串是jdbc:drill.zk
 
+20. Drill Kerberos 认证
+http://stackoverflow.com/questions/31413910/apache-drill-with-kerberos
+http://www.dremio.com/blog/securing-sql-on-hadoop-part-2-installing-and-configuring-drill/
+https://issues.apache.org/jira/browse/DRILL-3584
+
+
+21. Dremel论文原文以及翻译文
+http://www.importnew.com/2617.html
+http://www.vldb.org/pvldb/vldb2010/papers/R29.pdf
+
+22. Drill查询HDFS上的多个文件
+SELECT count(*) FROM  dfs.`/user/ahunt/test/2014/10/28/part-*`;
+
 
 
 
