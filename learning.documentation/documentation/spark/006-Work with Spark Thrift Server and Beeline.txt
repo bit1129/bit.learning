@@ -2,7 +2,16 @@
 
 sbin/start-thriftserver.sh
 
-spark的thrift server默认监听端口是10000，这个跟hive的thrift server的监听端口是一样的
+spark的thrift server默认监听端口是10000，这个跟hive的thrift server的监听端口是一样的，并且Spark的start-thriftserver.sh支持Hive的一些配置项，
+比如指定Thrift Server的端口号以及指定SparkSubmit的一些参数
+
+sbin/start-thriftserver.sh --hiveconf hive.server2.thrift.port=10000   \
+                           --hiveconf hive.server2.thrift.bind.host=feng02
+                           --master yarn-client
+                           --driver-class-path /home/jifeng/hadoop/spark-1.2.0-bin-2.4.1/lib/mysql-connector-java-5.1.32-bin.jar
+                           --executor-memory 1g
+
+通过sbin/start-thriftserver.sh --help可以查看start-thriftserver.sh支持的配置项
 
 
 2. 启动beeline
@@ -31,3 +40,6 @@ Transaction isolation: TRANSACTION_REPEATABLE_READ
 可以输入SQL语句，类似spark-sql终端
 
 
+关于指定链接的用户名和密码，
+beeline> !connect jdbc:hive2://localhost:10000 用户名 密码 org.apache.hive.jdbc.HiveDriver
+参见：https://cwiki.apache.org/confluence/display/Hive/HiveServer2+Clients#HiveServer2Clients-BeelineExample
