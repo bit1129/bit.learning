@@ -1,0 +1,5 @@
+下载源代码
+
+勾选hadoop2这个maven profile，就可以在Hive Root模块下进行Compile以及Package了
+
+注意：Package前需要将执行单元测试进行Disable

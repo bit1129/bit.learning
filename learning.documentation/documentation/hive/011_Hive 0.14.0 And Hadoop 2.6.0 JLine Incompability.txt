@@ -1,0 +1,27 @@
+Hive 0.14.0运行在Hadoop 2.6.0之上，
+
+运行hive命令启动hive时，报如下错：
+
+Exception in thread "main" java.lang.IncompatibleClassChangeError: Found interface jline.Terminal, but class was expected
+	at jline.ConsoleReader.<init>(ConsoleReader.java:191)
+	at jline.ConsoleReader.<init>(ConsoleReader.java:186)
+	at jline.ConsoleReader.<init>(ConsoleReader.java:174)
+	at org.apache.hadoop.hive.cli.CliDriver.getConsoleReader(CliDriver.java:798)
+	at org.apache.hadoop.hive.cli.CliDriver.executeDriver(CliDriver.java:746)
+	at org.apache.hadoop.hive.cli.CliDriver.run(CliDriver.java:677)
+	at org.apache.hadoop.hive.cli.CliDriver.main(CliDriver.java:616)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:606)
+	at org.apache.hadoop.util.RunJar.run(RunJar.java:221)
+	at org.apache.hadoop.util.RunJar.main(RunJar.java:136)
+
+
+解决办法：http://www.linuxidc.com/Linux/2015-10/123822.htm
+
+Hive 0.14 + Hadoop2.6.0
+/home/yuzt/software/bigdata/hadoop-2.6.3/share/hadoop/yarn/lib和$HIVE_HOME/lib都使用jline-0.9.94.jar
+
+Hive 1.2.1 + Hadoop2.6.0
+/home/yuzt/software/bigdata/hadoop-2.6.3/share/hadoop/yarn/lib和$HIVE_HOME/lib都使用jline-2.12.jar

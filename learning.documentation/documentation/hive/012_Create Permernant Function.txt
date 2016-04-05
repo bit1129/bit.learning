@@ -1,0 +1,3 @@
+
+在hive命令行执行如下命令
+create function x1 as 'com.bit.learning.hive.udf.LengthUDF' using jar "hdfs://hadoop.bit.com:9000/user/learning.hive.0.14.0-1.0-SNAPSHOT.jar";
