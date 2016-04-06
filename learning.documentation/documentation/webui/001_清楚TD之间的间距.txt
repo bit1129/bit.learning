@@ -1,0 +1,9 @@
+通过如下两个样式可以实现
+table {
+    border-collapse: collapse;
+    border-right: solid 1px #FFF;
+}
+
+table td {
+    border-left: solid 1px #FFF;
+}
