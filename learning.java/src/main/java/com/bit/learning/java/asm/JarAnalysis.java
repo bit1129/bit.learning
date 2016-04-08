@@ -6,6 +6,7 @@ import java.net.URLClassLoader;
 import java.util.*;
 import java.util.jar.JarEntry;
 import java.util.jar.JarInputStream;
+import java.util.zip.ZipEntry;
 
 public class JarAnalysis {
     public static void main(String[] args) throws Exception {
@@ -46,10 +47,13 @@ public class JarAnalysis {
 
         try {
             InputStream is = new FileInputStream(jarPath);
-            JarEntry entry = null;
             in = new JarInputStream(is);
 
-            while ((entry = in.getNextJarEntry()) != null) {
+            while (true) {
+                ZipEntry entry = in.getNextEntry();
+                if (entry == null) {
+                    break;
+                }
                 String name = entry.getName();
                 if (name.endsWith("class")) {
                     classes.add(name);

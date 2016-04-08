@@ -46,7 +46,7 @@ public class UDFByteCodeVerifierTest {
     }
 
     public static void main(String[] args) throws Exception {
-        Map<String, byte[]> className2ClassBytes = JarAnalysis.className2Bytes(null);
+        Map<String, byte[]> className2ClassBytes = JarAnalysis.className2Bytes("/home/yuzt/256hive-udf.jar");
         Set<Map.Entry<String, byte[]>> set = className2ClassBytes.entrySet();
         for (Map.Entry<String, byte[]> entry : set) {
             String className = entry.getKey();

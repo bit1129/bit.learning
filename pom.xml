@@ -15,6 +15,7 @@
     <module>learning.restlet</module>
     <module>learning.mybatis</module>
     <module>learning.documentation</module>
+    <module>learning.web</module>
   </modules>
   <properties>
     <scala.version>2.10.4</scala.version>
