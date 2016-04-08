@@ -1,0 +1,7 @@
+yarn.scheduler.maximum-allocation-mb这个Hadoop YARN配置项的含义是什么？
+
+在Spark的Client类中，调用verifyClusterResources方法对Spark作业分配的Executor内存
+以及ApplicationMaster内存进行快算验证，那么
+1. yarn.scheduler.maximum-allocation-mb指的是什么？
+2.GetNewApplicationResponse..getMaximumResourceCapability().getMemory()
+这个方法得到的是整个集群的资源最大容量还是单个Container的资源最大容量

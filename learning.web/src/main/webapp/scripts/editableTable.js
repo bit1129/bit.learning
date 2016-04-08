@@ -3,7 +3,7 @@ $(function () {
     function _fireRequestAndRenderUI() {
         $.ajax({
             type: "get",
-            url: "persons",
+            url: "/persons",
             success: function (data) {
                 alert(data);
             },
