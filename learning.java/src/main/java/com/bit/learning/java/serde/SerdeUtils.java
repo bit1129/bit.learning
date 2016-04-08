@@ -9,8 +9,6 @@ import java.util.List;
 public class SerdeUtils {
 
     /**
-     * Base64编码使得序列化和反序列化能正常工作
-     *
      * @param objects
      * @return
      * @throws IOException

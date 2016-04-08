@@ -28,7 +28,6 @@ import java.util.TreeSet;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 
-import com.sun.org.apache.xpath.internal.compiler.OpCodes;
 import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.FieldVisitor;

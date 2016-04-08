@@ -17,6 +17,7 @@
     </build>
 
     <dependencies>
+        <!--
         <dependency>
             <groupId>org.apache.hbase</groupId>
             <artifactId>hbase</artifactId>
@@ -43,6 +44,6 @@
             <artifactId>mysql-connector-java</artifactId>
             <version>5.1.37</version>
         </dependency>
-
+        -->
     </dependencies>
 </project>

@@ -73,6 +73,55 @@ public class HiveJdbcTest {
         runExecuteWithLog("select * from t1 join t2 on t1.line = t2.line ");
     }
 
+    @Test
+    public void testCreateFunctionWithUnsafeCode() throws SQLException {
+        String sql = "create function x100 as 'com.bit.learning.hive.udf.LengthUDF' using jar 'hdfs://hadoop.bit.com:9000/user/learning.hive.0.14.0-1.0-SNAPSHOT.jar'";
+        createFunction(sql);
+    }
+
+    @Test
+    public void testCreateFunctionWithSafeCode() throws SQLException {
+        String sql = "create function c100 as 'com.jd.hive.udf.LengthUDF' using jar 'hdfs://hadoop.bit.com:9000/user/hive.udf.safe-1.0-SNAPSHOT.jar'";
+        createFunction(sql);
+    }
+
+
+    private void createFunction(String sql) throws SQLException {
+        Connection conn = null;
+        HiveStatement hstmt = null;
+        ResultSet rs = null;
+        try {
+            conn = DriverManager.getConnection(CONN_URL, USER_NAME, PASS_WORD);
+            Statement stmt = conn.createStatement();
+            if (!(stmt instanceof HiveStatement)) {
+                throw new SQLException("The Statement is of HiveStatement");
+            }
+
+            hstmt = (HiveStatement) stmt;
+            hstmt.execute("use db_1");
+            boolean success = hstmt.execute(sql);
+//            if (!success) {
+//                throw new SQLException("创建失败");
+//            }
+        } catch(Exception e) {
+            System.out.println("函数创建失败");
+            throw new SQLException(e);
+        }finally {
+
+            if (rs != null) {
+                rs.close();
+            }
+
+            if (hstmt != null) {
+                hstmt.close();
+            }
+
+            if (conn != null) {
+                conn.close();
+            }
+        }
+    }
+
 
     private void runExecute(String sql) throws SQLException {
         Connection conn = null;
