@@ -69,20 +69,23 @@ $(document).ready(function () {
                 //创建一个input text
                 var input = $("<input type='text'>");
                 input.val(salary);
-                elem.empty();
-                elem.append(input);
 
-                //保持input text的样式与包含它的td一致
-                //1. 去掉边框
-                //2. 宽度与td一致
-                //3. 背景色与td一致
-                //4. 字体大小要保持一致
+                //调整input text的样式
+                //1. 边框
+                //2. 宽度设置
+                //3. 背景色
+                //4. 字体大小
                 input.css("border-width", "0px");
-                input.width(elem.width());
+                input.width(elem.width() - 10);
                 input.css("background-color", elem.css("background-color"));
                 input.css("font-size", elem.css("font-size"));
 
+                elem.empty();
+                elem.append(input);
+
                 //编辑完成，用户按下回车则提交编辑结果，按下Esc键取消编辑
+
+
                 input.keyup(function (evt) {
                     var keyCode = evt.which;
                     var self = $(this)
