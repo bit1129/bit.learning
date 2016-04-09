@@ -6,11 +6,20 @@
     <servlet>
         <servlet-name>personServlet</servlet-name>
         <servlet-class>com.data.servlets.PersonServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>entServlet</servlet-name>
+        <servlet-class>com.data.servlets.EntServlet</servlet-class>
         <load-on-startup>1</load-on-startup>
     </servlet>
 
     <servlet-mapping>
         <servlet-name>personServlet</servlet-name>
         <url-pattern>/persons/*</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>entServlet</servlet-name>
+        <url-pattern>/ent/*</url-pattern>
     </servlet-mapping>
 </web-app>
