@@ -5,19 +5,18 @@ $(document).ready(function () {
             type: "get",
             url: "/persons",
             success: function (response) {
-                //将响应结果转换为JSON
                 response = $.parseJSON(response);
                 _doRenderUI(response.data);
             },
             error: function (error) {
                 alert("Error: " + error.responseText);
             }
-        })
+        });
     }
 
     function _doRenderUI(data) {
 
-        if (!data) {
+        if (!data || data.length <= 0) {
             console.log("data is empty");
             return;
         }
