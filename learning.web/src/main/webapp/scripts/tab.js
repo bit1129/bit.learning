@@ -1,8 +1,25 @@
 $(function () {
+
+    function _initialUI() {
+        $("#dynamicContent").hide();
+        $("div.defaultTab").addClass("active");
+    }
+
+    _initialUI();
+
     $("ul li").each(function (index) {
         var self = $(this);
 
         self.mouseover(function () {
+            /**
+             * 已经在当前tab页面上
+             */
+            if (self.hasClass("active")) {
+                return;
+            }
+            $("ul li").removeClass("active");
+            self.addClass("active");
+
             if (index === 0) {
                 $("#dynamicContent").hide();
                 $("#staticContent").show();
