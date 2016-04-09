@@ -7,4 +7,5 @@ import java.util.List;
  */
 public interface IPersonFactory {
     List<Person> get();
+    public void updateSalary(String id, double salary);
 }

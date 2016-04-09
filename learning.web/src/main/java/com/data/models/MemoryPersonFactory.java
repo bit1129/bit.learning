@@ -5,7 +5,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MemoryPersonFactory implements IPersonFactory {
-    List<Person> persons = new ArrayList<Person>();
+    /**
+     * Cache in memory
+     */
+    private static List<Person> persons = new ArrayList<Person>();
 
     public List<Person> get() {
         synchronized (MemoryPersonFactory.class) {
@@ -30,5 +33,15 @@ public class MemoryPersonFactory implements IPersonFactory {
             return persons;
         }
 
+    }
+
+    public void updateSalary(String id, double salary) {
+        synchronized (MemoryPersonFactory.class) {
+            for (Person person : persons) {
+                if (person.getId().equals(id)) {
+                    person.setSalary(salary);
+                }
+            }
+        }
     }
 }

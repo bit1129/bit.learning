@@ -1,0 +1,29 @@
+#container {
+    margin: 0 auto;
+    width: 60%;
+}
+
+h3 {
+    text-align: center;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th {
+    text-align: left;
+}
+
+table, td, th {
+    border: 1px solid green;
+}
+
+.highlight {
+    background-color: lightgray;
+}
+
+tr.hover {
+    background-color: aqua;
+}
