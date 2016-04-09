@@ -37,8 +37,15 @@ $(function () {
                 $.ajax({
                     "type": "get",
                     "url": "/ent",
-                    "success": function (data) {
-                        contentArea.html(data);
+                    "success": function (response) {
+                        data = $.parseJSON(response).data;
+                        for (var i = 0; i < data.length; i++) {
+                            var label = data[i].label;
+                            var href = data[i].href;
+                            var p = $("<p><a href=" + href + " target=_blank>" + label + "</a></p>");
+                            contentArea.append(p);
+
+                        }
                         contentArea.show();
                     },
                     "error": function (error) {
