@@ -1,0 +1,17 @@
+#container {
+    margin: 0 auto;
+    margin-top: 50px;
+    width: 200px;
+}
+
+span#messageArea {
+    margin-left: 20px;
+}
+
+.success {
+    color: green;
+}
+
+.fail {
+    color: red;
+}
