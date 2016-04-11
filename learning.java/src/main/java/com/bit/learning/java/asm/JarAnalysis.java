@@ -57,6 +57,7 @@ public class JarAnalysis {
                 String name = entry.getName();
                 if (name.endsWith("class")) {
                     classes.add(name);
+                    System.out.println("===========>" + name);
                 }
                 System.out.println(name);
             }
