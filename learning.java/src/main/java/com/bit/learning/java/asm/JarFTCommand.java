@@ -18,9 +18,9 @@ public class JarFTCommand {
                     while ((line = err.readLine()) != null) {
                         System.out.println("eeeeee: " + line);
                     }
-                } catch(IOException e) {
+                } catch (IOException e) {
 
-                }finally {
+                } finally {
                     if (err != null) {
                         try {
                             err.close();
@@ -37,7 +37,9 @@ public class JarFTCommand {
             br = new BufferedReader(new InputStreamReader(in, "UTF-8"));
             String line = "";
             while ((line = br.readLine()) != null) {
-                System.out.println("zzzzzz: " + line);
+                if (line.endsWith(".class")) {
+                    System.out.println("zzzzzz: " + line);
+                }
             }
         } finally {
             br.close();
