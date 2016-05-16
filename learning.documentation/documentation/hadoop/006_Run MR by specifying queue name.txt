@@ -1,0 +1,8 @@
+hadoop jar ./share/hadoop/mapreduce/hadoop-mapreduce-examples-2.6.3.jar pi -D mapreduce.job.queuename=beta 5 10
+
+1. 对于YARN Example Pi来说，队列名称需要设置到pi和参数之间
+2. 指定队列名称是通过-D mapreduce.job.queuename=队列名 -D和mapreduce.job.queuename之间有个空格
+3. beta是根队列root之下的一个子队列，但是指定是无需指定root
+
+比如有个root.a.a1,
+那么指定队列名字时，只需要指定a.a1
