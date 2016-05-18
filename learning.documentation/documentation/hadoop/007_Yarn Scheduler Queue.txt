@@ -1,0 +1,44 @@
+Queue State: 	RUNNING
+Used Capacity: 	0.0%
+Absolute Used Capacity: 	0.0%
+Absolute Capacity: 	30.0%
+Absolute Max Capacity: 	100.0%
+Used Resources: 	<memory:0, vCores:0>
+Num Schedulable Applications: 	0
+Num Non-Schedulable Applications: 	0
+Num Containers: 	0
+Max Applications: 	3000
+Max Applications Per User: 	3000
+Max Application Master Resources: 	<memory:1024, vCores:1>
+Max Application Master Resources Per User: 	<memory:1024, vCores:1>
+Configured Capacity: 	60.0%
+Configured Max Capacity: 	100.0%
+Configured Minimum User Limit Percent: 	100%
+Configured User Limit Factor: 	1.0
+Active Users:
+Accessible Node Labels:
+
+在Yarn Scheduler的UI上有如上的显示：
+
+1. 各个叶子队列的Absolute Capacity应该是100%
+2. Configured Capacity是子队列在配置文件中配置的占据本父队列的百分比，所以子队列的Absolute Capacity = 父队列的Absolute Capacity*队列内的百分比
+3. Absolute Used Capacity表示该队列使用量占据总的资源的百分比
+4. Used Capacity是Absolute Used Capacity除以Absolute Capacity
+5. Used Resources表示该队列使用的内存数以及vCore数，比如<memory:2048, vCores:1>
+6. Absolute Max Capacity表示该队列能够使用的最大资源量（绝对值）
+7. Active Users表示该队列中运行任务的用户(可能有多个用户，比如yuzt <Memory: 2048 (100.00%), vCores: 1 (100.00%), Schedulable Apps: 1, Non-Schedulable Apps: 0>)
+8. Configured Max Capacity表示该队列能使用它的父队列下的多少比例的资源，如果是100%，那么表示该队列可以抢占其它队列的资源
+9. Max Applications表示该队列能接受的最大应用数，包括正在运行的以及正在排队等待的作业
+10. NumContainers表示该队列使用了多少数目的Container
+11.Num Schedulable Applications表示可调度的应用，包括正在运行以及运行结束的
+12.
+
+http://tech.uc.cn/?p=1438
+
+
+
+1. 分为两类：普通用户队列和VIP队列
+2. 普通用户队列不能抢占VIP队列的资源，但是VIP队列可以抢占普通用户队列的资源
+3. 如果普通用户队列的资源打满，VIP队列的资源也打满，那么当VIP应用来的时候，让普通用户队列立马释放一定的资源给VIP application使用
+4. 如果普通用户队列有等待的application，vip用户队列也有等待的application，普通队列释放的资源优先将资源分配给vip application
+
