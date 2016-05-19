@@ -1,0 +1,21 @@
+在spark-defaults.conf文件中做如下配置：
+
+spark.eventLog.enabled           true
+spark.eventLog.dir               hdfs://ns1/log
+spark.history.fs.logDirectory    hdfs://ns1/log
+spark.serializer                 org.apache.spark.serializer.KryoSerializer
+spark.yarn.jar                   hdfs://ns1/user/hive/spark-assembly-1.6.1-hadoop2.6.1.jar
+
+
+spark.executor.extraLibraryPath=/export/App/hadoop-2.6.1-security/lib/native
+spark.driver.extraLibraryPath=/export/App/hadoop-2.6.1-security/lib/native
+spark.executor.extraClassPath=/export/App/hadoop-2.6.1-security/lib/hadoop-lzo.jar,/export/App/apache-hive-1.2.1-bin/lib/hive-shims-scheduler-1.2.1.jar
+spark.driver.extraClassPath=/export/App/hadoop-2.6.1-security/lib/hadoop-lzo.jar,/export/App/apache-hive-1.2.1-bin/lib/hive-shims-scheduler-1.2.1.jar
+
+spark.history.kerberos.enabled true
+spark.history.kerberos.principal hive/bds-test-002@HADOOP.JD
+spark.history.kerberos.keytab /export/keytabs/hive.keytab
+
+spark.yarn.principal    hive/bds-test-002@HADOOP.JD
+spark.yarn.keytab       /export/keytabs/hive.keytab
+spark.yarn.security.tokens.hive.enabled true
